@@ -31,4 +31,25 @@ class Welcome extends CI_Controller {
 			);
 		}
 	}
+	public function login()
+	{
+		$data['auth_error'] = '';
+		$email = $this->input->post ('email') ;
+		$password = $this->input->post ('password') ;
+		$userdata = $this->User_model->authenticate ( $email , $password) ;
+		if ( $userdata === false  )
+		{
+			$data ['auth_error'] = 'The email and password don\'t match.'  ;
+		}
+		else
+		{
+			$this->session->set_userdata (array (
+					'email' => $userdata['email'] ,
+					'user_id' => $userdata['id'],
+					'logged_in' => true
+			)) ;
+			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
+
+		}
+	}
 }
