@@ -50,8 +50,14 @@ class Welcome extends CI_Controller {
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-			$data['session'] = $this->session->userdata;
-			$this->load->view('home', $data);
+			//$data['session'] = $this->session->userdata;
+			redirect('Welcome/account');
 		}
+	}
+
+	public function account()
+	{
+		$data['session'] = $this->session->userdata;
+		$this->load->view('home', $data);
 	}
 }
