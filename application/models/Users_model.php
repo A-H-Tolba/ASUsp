@@ -7,6 +7,10 @@ class Users_model extends CI_Model
 		$query = $this->db->get_where($table_name,array('active'=>'yes'))->result();
 		return $query;
 	}
+	function insertData()
+	{
+		$this->db->insert('users',$data);
+	}
 	function authenticate ( $email , $password )
     {
     	$password = //md5 ( $password ) ;
