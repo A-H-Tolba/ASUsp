@@ -24,10 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav navbar-right">
-		        <form name="myForm" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/login">
-					<input type="email" name="email" class="form-control" placeholder="E-Mail">
-					<input type="password" name="password" class="form-control" placeholder="Password">
-					<button type="submit">Submit</button>
+		        <form name="myForm" id="login" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/login">
+					<input type="email" name="email" class="login form-control" placeholder="E-Mail">
+					<input type="password" name="password" class="login form-control" placeholder="Password">
+					<button id="btn-lgn" type="submit">Submit</button>
 				</form>
 		      </ul>
 		     

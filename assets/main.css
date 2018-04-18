@@ -1,1 +1,4 @@
 html, body {height: 100%; width: 100%; margin: 0;}
+#btn-lgn {background: rgba(0,0,0,0); border: none; color: #ed1;}
+#login {margin-top: 1.5%;}
+.login {position: relative; top: 75%; display: inline-block; width: 40%;}
