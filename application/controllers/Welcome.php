@@ -35,7 +35,7 @@ class Welcome extends CI_Controller {
 		$data['auth_error'] = '';
 		$email = $this->input->post ('email') ;
 		$password = $this->input->post ('password') ;
-		$userdata = $this->User_model->authenticate ( $email , $password) ;
+		$userdata = $this->Users_model->authenticate ( $email , $password) ;
 		if ( $userdata === false  )
 		{
 			$data ['auth_error'] = 'The email and password don\'t match.'  ;
