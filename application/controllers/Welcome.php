@@ -19,7 +19,7 @@ class Welcome extends CI_Controller {
         	$valid['valid']=TRUE;
 			$data = array(
 				'email' => $this->input->post('email'),
-				'user' => $this->input->post('name'),
+				'username' => $this->input->post('name'),
 				'Password'=> $this->input->post('password')
 			);
 		}
