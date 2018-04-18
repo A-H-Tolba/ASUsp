@@ -39,6 +39,7 @@ class Welcome extends CI_Controller {
 		if ( $userdata === false  )
 		{
 			$data ['auth_error'] = 'The email and password don\'t match.'  ;
+			echo $data ['auth_error'] ;
 		}
 		else
 		{
@@ -48,7 +49,7 @@ class Welcome extends CI_Controller {
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-
+			print_r($this->session->userdata) ;
 		}
 	}
 }
