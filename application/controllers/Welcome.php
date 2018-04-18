@@ -3,13 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->load->model('Users_model');
-	}
-
 	public function index()
 	{
 		$this->load->view('asusp');
@@ -29,6 +22,27 @@ class Welcome extends CI_Controller {
 				'username' => $this->input->post('name'),
 				'Password'=> $this->input->post('password')
 			);
+		}
+	}
+	public function login()
+	{
+		$data['auth_error'] = '';
+		$email = $this->input->post ('email') ;
+		$password = $this->input->post ('password') ;
+		$userdata = $this->User_model->authenticate ( $email , $password) ;
+		if ( $userdata === false  )
+		{
+			$data ['auth_error'] = 'The email and password don\'t match.'  ;
+		}
+		else
+		{
+			$this->session->set_userdata (array (
+					'email' => $userdata['email'] ,
+					'user_id' => $userdata['id'],
+					'logged_in' => true
+			)) ;
+			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
+
 		}
 	}
 }
