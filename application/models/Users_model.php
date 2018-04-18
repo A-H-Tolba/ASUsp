@@ -13,7 +13,7 @@ class Users_model extends CI_Model
 	}
 	function authenticate ( $email , $password )
     {
-    	$password = //md5 ( $password ) ;
+    	//$password = md5 ( $password ) ;
     	$return = $this->db->get_where ( 'users' , array (
     			'email' => $email ,
     			'password' => $password//,
