@@ -24,23 +24,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#home" id="home" class="text-center active">Home</a></li>
-		        <li><a href="#about" id="about" class="text-center">About Us</a></li> 
-		        <li><a href="#structure" id="structure" class="text-center">Structure</a></li>
-		        <li><a href="#gallery" id="gallery" class="text-center">Gallery</a></li>
-		        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events<span class="caret"></span></a>
-		          <ul id="ws" class="dropdown-menu"><li><a href="#" id="ebe">BE '18</a></li><li><a href="#" id="et">Technates '18</a></li></ul>
-		        </li>
+		        <form name="myForm" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/login">
+					<input type="email" name="email" class="form-control" placeholder="E-Mail">
+					<input type="password" name="password" class="form-control" placeholder="Password">
+					<button type="submit">Submit</button>
+				</form>
 		      </ul>
 		     
 		    </div>
 		  </div>
 		</nav>
-		<form name="myForm" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/login">
-			<input type="email" name="email" class="form-control" placeholder="E-Mail">
-			<input type="password" name="password" class="form-control" placeholder="Password">
-			<button type="submit">Submit</button>
-		</form>
+		
 </body>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap.min.js"></script>
