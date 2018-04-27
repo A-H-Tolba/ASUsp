@@ -60,4 +60,10 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
 		$this->load->view('home', $data);
 	}
+	public function search()
+	{
+		$username = $this->input->post('username');
+		$data['users'] = $this->Users_model->search($username);
+		$this->load->view('profile', $data);
+	}
 }
