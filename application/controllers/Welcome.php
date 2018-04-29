@@ -11,7 +11,9 @@ class Welcome extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->load->view('asusp');
+		if($this->session->has_userdata('logged_in')) redirect('Welcome/account');
+		$this->load->view('header');
+		$this->load->view('home');
 	}
 	public function signup()
 	{
@@ -50,7 +52,6 @@ class Welcome extends CI_Controller {
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-			//$data['session'] = $this->session->userdata;
 			redirect('Welcome/account');
 		}
 	}
@@ -58,6 +59,14 @@ class Welcome extends CI_Controller {
 	public function account()
 	{
 		$data['session'] = $this->session->userdata;
-		$this->load->view('home', $data);
+		$this->load->view('header', $data);
+		$this->load->view('profile', $data);
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		$this->load->view('header');
+		$this->load->view('home');
 	}
 }

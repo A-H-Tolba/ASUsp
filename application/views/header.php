@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -23,27 +24,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav navbar-right">
+		      	<?php if(!isset($session)) { ?>
 		        <form name="myForm" id="login" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/login">
 					<input type="email" name="email" class="login form-control" placeholder="E-Mail">
 					<input type="password" name="password" class="login form-control" placeholder="Password">
 					<button id="btn-lgn" type="submit">Submit</button>
 				</form>
+				<?php ;} else { ?>
+					<a href="<?php echo base_url(); ?>Welcome/logout"><button id="btn-lgn">Log out</button></a>
+				<?php ;} ?>
 		      </ul>
 		     
 		    </div>
 		  </div>
 		</nav>
-
-		<div class="container-fluid">
-		<form name="myForm" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/signup">
-			<input type="text" name="username" class="form-control" placeholder="Username">
-			<input type="email" name="email" class="form-control" placeholder="E-Mail">
-			<input type="password" name="password" class="form-control" placeholder="Password">
-			<button type="submit">Submit</button>
-		</form>
-		</div>
-		
-</body>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap.min.js"></script>
-</html>
