@@ -27,4 +27,10 @@ class Users_model extends CI_Model
     		return $return ;
     	}
     }
+    	public function search($username)
+    {
+      $this->db->like('username',$username);
+      $query = $this->db->get('users');
+      return $query->result();
+    }
 }

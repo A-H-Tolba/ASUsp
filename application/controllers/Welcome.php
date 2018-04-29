@@ -69,4 +69,10 @@ class Welcome extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('home');
 	}
+	public function search()
+	{
+		$username = $this->input->post('username');
+		$data['users'] = $this->Users_model->search($username);
+		$this->load->view('sprofile', $data);
+	}
 }
