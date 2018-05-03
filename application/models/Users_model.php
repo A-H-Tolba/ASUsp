@@ -43,5 +43,15 @@ class Users_model extends CI_Model
       $this->db->like('username',$username);
       $query = $this->db->get('users');
       return $query->result();
-    }
+	}
+	
+	public function get_posts($id)
+	{
+		$query = $this->db->get_where('posts' , array('user_id' => $id));
+		return $query->result_array();
+	}
+	public function did_delete_row($id){
+	  $this->db->where('id', $id);
+	  $this->db->delete('users');
+	}
 }
