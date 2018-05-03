@@ -110,4 +110,18 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('admin_control', $data);
 	}
+	public function delete()
+	{
+
+		$id = $this->input->post('delid');
+		$this->load->model('Users_model');
+    	$this->Users_model->did_delete_row($id);
+  		redirect('Welcome/ad_account');
+	}
+	public function ad_search()
+	{
+		$username = $this->input->post('username');
+		$data['users'] = $this->Users_model->search($username);
+		$this->load->view('search_res', $data);
+	}
 }
