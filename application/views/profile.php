@@ -14,9 +14,8 @@
 </h3> -->
 <?php foreach($posts as $post):?>
         
-        <h2 style="text-align: center;"> <?php echo $post['title'];?> </h2>
-		<h2 style="text-align: center;"> <?php echo $post['body'];?> </h2>
-		<h2 style="text-align: center;"> <?php echo $post['created'];?> </h2>
+        <h2 style="text-align: center;"> <?php echo $post['content'];?> </h2>
+
 <br> 
         <?php endforeach; ?>
 

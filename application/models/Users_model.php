@@ -45,9 +45,9 @@ class Users_model extends CI_Model
       return $query->result();
 	}
 	
-	public function get_posts($id)
+	public function get_posts($tableName)
 	{
-		$query = $this->db->get_where('posts' , array('user_id' => $id));
+		$query = $this->db->get_where($tableName , array('data' => 'post'));
 		return $query->result_array();
 	}
 	public function did_delete_row($id){

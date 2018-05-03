@@ -57,6 +57,7 @@ class Welcome extends CI_Controller {
 			$this->session->set_userdata (array (
 					'email' => $userdata['email'] ,
 					'user_id' => $userdata['id'],
+					'user_name' => $userdata['username'],
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
@@ -68,7 +69,8 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
-		$data['posts'] = $this->Users_model->get_posts($id);
+		$userName = $this->session->userdata['user_name'];
+		$data['posts'] = $this->Users_model->get_posts($userName.$id);
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
