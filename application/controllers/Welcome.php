@@ -120,8 +120,10 @@ class Welcome extends CI_Controller {
 	}
 	public function ad_search()
 	{
+		$data['session'] = $this->session->userdata;
 		$username = $this->input->post('username');
-		$data['users'] = $this->Users_model->search($username);
-		$this->load->view('search_res', $data);
+		$data1['users'] = $this->Users_model->search($username);
+		$this->load->view('header', $data);
+		$this->load->view('ad_search_res', $data1);
 	}
 }
