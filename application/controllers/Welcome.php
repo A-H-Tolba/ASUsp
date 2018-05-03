@@ -11,7 +11,14 @@ class Welcome extends CI_Controller {
 	}
 	public function index()
 	{
-		if($this->session->has_userdata('logged_in')) redirect('Welcome/account');
+		if($this->session->has_userdata('logged_in'))
+		{
+			$id = $this->session->userdata['user_id'];
+			if($id == 0){redirect('Welcome/ad_account');}
+		 else {redirect('Welcome/account');}
+		}
+
+		
 		$this->load->view('header');
 		$this->load->view('home');
 	}

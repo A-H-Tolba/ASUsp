@@ -1,3 +1,9 @@
+<h1  style="text-align: center;">Admin Control Panel</h1>
+<center><form  action="<?php echo base_url(); ?>Welcome/ad_search" method="post">
+	<input type="text" name="username" placeholder="search_by_userName">
+	<input type="submit" name="submit" value="Search">
+</form></center>
+<center><form  action='<?php echo base_url(); ?>Welcome/delete' method='post'>
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
@@ -39,7 +45,9 @@ Select User to delete :
   <option value=''>Select...</option>";
   while($row = mysqli_fetch_array($result))
 {
-  echo "<option value=".$row['id'].">".$row['id'] ."</option>";
+	if((int)$row['id'] != 0){
+  		echo "<option value=".$row['id'].">".$row['id'] ."</option>";
+	}
  }
 echo "</datalist>
 </p>
