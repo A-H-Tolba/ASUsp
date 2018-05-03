@@ -59,6 +59,8 @@ class Welcome extends CI_Controller {
 	public function account()
 	{
 		$data['session'] = $this->session->userdata;
+		$id = $this->session->userdata['user_id'];
+		$data['posts'] = $this->Users_model->get_posts($id);
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
@@ -73,6 +75,6 @@ class Welcome extends CI_Controller {
 	{
 		$username = $this->input->post('username');
 		$data['users'] = $this->Users_model->search($username);
-		$this->load->view('sprofile', $data);
+		$this->load->view('search_res', $data);
 	}
 }
