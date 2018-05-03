@@ -1,21 +1,23 @@
 	<h1 style="text-align: center;">Welcome <?php echo $session['email'] ?></h1>
-	<h1 style="text-align: center;">Welcome <?php echo $session['user_id'] ?></h1>
 
-	<!-- <h2 class = "text-center">Post one </h2>
-<h3 class = "text-center">
-	Hello This is a new post<br><br>
-	<button id="likeBtn" onclick="return like()">like</button>
-	<button id = "commentBtn" onclick="return addComment()">Comment</button>
-	<div id="commentDiv" style = "display:none;">
-		<br>
-		<input type="text" placeholder="add comment">
-		<button>Post</button>
-	</div>
-</h3> -->
+	
 <?php foreach($posts as $post):?>
         
-        <h2 style="text-align: center;"> <?php echo $post['content'];?> </h2>
-
+        <h2 style="text-align: center;"> <?php echo $post['content'];?> 
+		<h4 style="text-align: center;"><?php echo $post['comments'];?></h4>
+	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
+		<div id="commentDiv" style="text-align: center;">
+		<button id="likeBtn" onclick="return like()" class="btn btn-md btn-default">like</button>
+		<br>
+		<br>
+		<?php echo form_open('Welcome/addComment/'.$post['id']); ?>
+		<input type="text" name = "comment" placeholder="add comment" >
+		<input type="submit" name="submit" value="Comment">
+		</form>
+	</div></h2>
+		
+	
+</h3>
 <br> 
         <?php endforeach; ?>
 

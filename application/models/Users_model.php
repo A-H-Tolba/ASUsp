@@ -54,4 +54,14 @@ class Users_model extends CI_Model
 	  $this->db->where('id', $id);
 	  $this->db->delete('users');
 	}
+	public function create_comment($post_id,$userAccount,$comment)
+	{
+		
+		$this->db->where('id',$post_id);
+		$comm = array(
+			'comments' => $comment,
+		);
+		return $this->db->update($userAccount, $comm);
+	}
+
 }
