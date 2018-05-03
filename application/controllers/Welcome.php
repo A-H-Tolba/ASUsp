@@ -139,6 +139,7 @@ class Welcome extends CI_Controller {
 
 	public function addComment($post_id)
 	{
+		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
 		$userName = $this->session->userdata['user_name'];
 		$userAccount = $userName.$id;
@@ -150,6 +151,9 @@ class Welcome extends CI_Controller {
 			$this->load->view('profile', $data);
 		} else {
 			$this->Users_model->create_comment($post_id,$userAccount,$comment);
+			// $this->load->view('header', $data);
+			// $this->load->view('profile', $data);
+			redirect('Welcome/account');
 		}
 	}
 }
