@@ -30,7 +30,8 @@ class Welcome extends CI_Controller {
 				'username' => $this->input->post('username'),
 				'Password'=> $this->input->post('password')
 			);
-			$this->db->insert('users',$data);
+			$this->Users_model->insertData($data);
+			redirect('Welcome/index');
 		}
 	}
 	public function login()
