@@ -7,9 +7,19 @@ class Users_model extends CI_Model
 		$query = $this->db->get_where($table_name,array('active'=>'yes'))->result();
 		return $query;
 	}
-	function insertData()
+	function insertData($data)
 	{
+		$this->load->dbforge();
 		$this->db->insert('users',$data);
+		$fields = array(
+        	'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
+        	'data' => array('type' => 'ENUM("post","friend")', 'null' => FALSE),
+        	'comments' => array('type' => 'TEXT'),
+        	'likes' => array('type' => 'TEXT')
+		);
+		$this->dbforge->add_field($fields);
+		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->create_table($data['username'].$this->db->get_where('users',array('email'=>$data['email']))->result()[0]->id);
 	}
 	function authenticate ( $email , $password )
     {
