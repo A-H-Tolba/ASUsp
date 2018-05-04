@@ -142,6 +142,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('ad_search_res', $data1);
 	}
+	public function create_post(){
+		$data_name['session'] = $this->session->userdata;
+		$id = $this->session->userdata['user_id'];
+		$data = array(
+				'content' => $this->input->post('body'),
+			);
+		$this->Users_model->create_post($data,$id);
+	}
 }
 class friendcontroller extends  CI_Controller
 { 
