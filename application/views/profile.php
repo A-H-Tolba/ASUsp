@@ -5,6 +5,12 @@
 	<input type="text" name="username" placeholder="search_by_userName">
 	<input type="submit" name="submit" value="Search">
 </form>
+<hr>
+<form action="<?php echo base_url(); ?>Welcome/create_post" method="post" >
+	<h3>Add Post</h3>
+  <input name="body">
+  <button type="submit">Post</button>
+</form>
 </body>
 <script>
 	function addComment()
