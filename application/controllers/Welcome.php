@@ -57,7 +57,6 @@ class Welcome extends CI_Controller {
 			$this->session->set_userdata (array (
 					'email' => $userdata['email'] ,
 					'user_id' => $userdata['id'],
-					'user_name' => $userdata['username'],
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
@@ -69,8 +68,7 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
-		$userName = $this->session->userdata['user_name'];
-		$data['posts'] = $this->Users_model->get_posts($userName.$id);
+		
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
@@ -83,8 +81,10 @@ class Welcome extends CI_Controller {
 	}
 	public function search()
 	{
+	
 		$username = $this->input->post('username');
 		$data['users'] = $this->Users_model->search($username);
+		
 		$this->load->view('search_res', $data);
 	}
 	public function ad_login()
@@ -115,8 +115,7 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
-		$userName = $this->session->userdata['user_name'];
-		$data['posts'] = $this->Users_model->get_posts($userName.$id);
+		$data['posts'] = $this->Users_model->get_posts($id);
 		$this->load->view('header', $data);
 		$this->load->view('admin_control', $data);
 	}
@@ -136,24 +135,28 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('ad_search_res', $data1);
 	}
-
-	public function addComment($post_id)
-	{
-		$data['session'] = $this->session->userdata;
-		$id = $this->session->userdata['user_id'];
-		$userName = $this->session->userdata['user_name'];
-		$userAccount = $userName.$id;
-		$comment = $this->input->post('comment');
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('comment', 'Comment', 'required');
-		if($this->form_validation->run() === FALSE){
-			$this->load->view('header', $data);
-			$this->load->view('profile', $data);
-		} else {
-			$this->Users_model->create_comment($post_id,$userAccount,$comment);
-			// $this->load->view('header', $data);
-			// $this->load->view('profile', $data);
-			redirect('Welcome/account');
-		}
-	}
 }
+class friendcontroller extends  CI_Controller
+{ 
+	public function getIndex()
+	{ $friend= Auth :: user()->friends();
+	  $requests = Auth :: user()->friendRequests();
+
+
+	  return view ('friends.index')
+	  ->with('friends',$friends)
+      ->with('requests',$requests);
+
+	}
+	
+	
+	public function getAdd($username)
+	{ dd($username);
+
+	}
+
+}
+
+
+
+
