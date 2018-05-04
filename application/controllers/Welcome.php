@@ -86,6 +86,13 @@ class Welcome extends CI_Controller {
 		$data['users'] = $this->Users_model->search($username);
 		
 		$this->load->view('search_res', $data);
+		
+		$data['session'] = $this->session->userdata;
+		$id = $this->session->userdata['user_id'];
+		
+		$this->load->view('header', $data);
+		$this->load->view('profile', $data);
+		
 	}
 	public function ad_login()
 	{
