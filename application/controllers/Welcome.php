@@ -57,6 +57,7 @@ class Welcome extends CI_Controller {
 			$this->session->set_userdata (array (
 					'email' => $userdata['email'] ,
 					'user_id' => $userdata['id'],
+					'user_name' => $userdata['username'],
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
@@ -68,7 +69,8 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
-		
+		$userName = $this->session->userdata['user_name'];
+		$data['posts'] = $this->Users_model->get_posts($userName.$id);
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
@@ -150,6 +152,27 @@ class Welcome extends CI_Controller {
 			);
 		$this->Users_model->create_post($data,$id);
 	}
+
+	public function addComment($post_id)
+ 	{
+		$data['session'] = $this->session->userdata;
+ 		$id = $this->session->userdata['user_id'];
+ 		$userName = $this->session->userdata['user_name'];
+ 		$userAccount = $userName.$id;
+ 		$comment = $this->input->post('comment');
+ 		$this->load->library('form_validation');
+ 		$this->form_validation->set_rules('comment', 'Comment', 'required');
+ 		if($this->form_validation->run() === FALSE){
+ 			$this->load->view('header', $data);
+ 			$this->load->view('profile', $data);
+ 		} else {
+ 			$this->Users_model->create_comment($post_id,$userAccount,$comment);
+			// $this->load->view('header', $data);
+		// $this->load->view('profile', $data);
+		redirect('Welcome/account');
+ 		}
+ 	}
+ 
 }
 class friendcontroller extends  CI_Controller
 { 
