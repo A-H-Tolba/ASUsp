@@ -171,7 +171,17 @@ class Welcome extends CI_Controller {
 		// $this->load->view('profile', $data);
 		redirect('Welcome/account');
  		}
- 	}
+	 }
+	 
+	public function Like($post_id)
+	{
+		$data['session'] = $this->session->userdata;
+ 		$id = $this->session->userdata['user_id'];
+ 		$userName = $this->session->userdata['user_name'];
+		$userAccount = $userName.$id;
+		$this->Users_model->like_post($post_id,$userAccount);
+		redirect('Welcome/account');
+	}
  
 }
 class friendcontroller extends  CI_Controller

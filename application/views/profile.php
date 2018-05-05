@@ -16,7 +16,8 @@
 		<h4 style="text-align: center;"><?php echo $post['comments'];?></h4>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
-		<button id="likeBtn" onclick="return like()" class="btn btn-md btn-default">like</button>
+		<?php $liked = $post['likes']; ?>
+		<input type="button" style = "color:blue;" value = "Like" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);?>'" class="btn btn-md btn-default"></input>
 		<br>
 		<br>
 		<?php echo form_open('Welcome/addComment/'.$post['id']); ?>
@@ -31,30 +32,20 @@
         <?php endforeach; ?>
 </body>
 <script>
-	function addComment()
-	{
-		var y = document.getElementById("commentDiv");
-		if(y.style.display=="none")
-		{
-			y.style.display = "block";
-		}
-		else
-		{
-			y.style.display = "none";
-		}
-
-		
-	}
 	function like()
 	{
+		window.location='<?php echo site_url("Welcome/Like/".$post['id']);?>'
+		var liked= "<?php echo $liked; ?>";
 		var z = document.getElementById("likeBtn");
-		if(z.style.color=="blue")
+		if(liked == '0')
 		{
 			z.style.color="black";
+			z.content = "like";
 		}
 		else
 		{
 			z.style.color="blue";
+			z.content = "liked";
 		}
 	}
 </script>
