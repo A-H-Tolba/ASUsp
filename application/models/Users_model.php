@@ -69,7 +69,7 @@ class Users_model extends CI_Model
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
          $result = $query->row()->username;
-         $this->db->insert($result,$data);
+         $this->db->insert($result.$id,$data);
      }
 	}
 	public function like_post($post_id,$userAccount)
