@@ -38,3 +38,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    </div>
 		  </div>
 		</nav>
+		<img src="<?php echo base_url(); ?>assets/asu.png" id="asui">

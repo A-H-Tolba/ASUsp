@@ -1,4 +1,7 @@
-html, body {height: 100%; width: 100%; margin: 0;}
+html, body {height: 100%; width: 100%; margin: 0; background: linear-gradient(#000, #000, #333, #aaa);}
+.navbar {background-color: #EDC621; border-color: #EDC621; width: 100%; border-radius: 0;}
+#asui {position: absolute; bottom: 10px;}
+#frm {width: 30%; margin-right: 5%; float: right; margin-top: 2em;}
 #btn-lgn {background: rgba(0,0,0,0); border: none; color: #ed1;}
 #login {margin-top: 1.5%;}
 .login {position: relative; top: 75%; display: inline-block; width: 40%;}
