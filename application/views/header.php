@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<nav class="navbar navbar-inverse navbar-fixed">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
+		    	<a href="#"><img src="<?php echo base_url(); ?>assets/logo.png"></a>
 		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
