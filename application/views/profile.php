@@ -10,7 +10,7 @@
   <input name="body">
   <button type="submit">Post</button>
 </form>
-<?php foreach($posts as $post):?>
+<?php foreach(array_reverse($posts) as $post):?>
         
         <h2 style="text-align: center;"> <?php echo $post['content'];?> 
 		<h4 style="text-align: center;"><?php echo $post['comments'];?></h4>

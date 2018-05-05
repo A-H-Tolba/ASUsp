@@ -151,6 +151,7 @@ class Welcome extends CI_Controller {
 				'content' => $this->input->post('body'),
 			);
 		$this->Users_model->create_post($data,$id);
+		redirect('Welcome/account');
 	}
 
 	public function addComment($post_id)
