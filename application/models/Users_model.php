@@ -71,4 +71,32 @@ class Users_model extends CI_Model
          $result = $query->row()->username;
          $this->db->insert($result,$data);
      }
+	}
+	public function like_post($post_id,$userAccount)
+	{
+		
+		$query = $this->db->query("SELECT likes FROM $userAccount WHERE id = $post_id;");
+		foreach ($query->result() as $row)
+		{
+				echo $row->likes;
+		}
+		if($row->likes != '1')
+		{
+			$like = array
+			(
+				'likes' => '1',
+			);
+		}
+		else
+		{
+			$like = array
+			(
+				'likes' => '0',
+			);
+		}
+		$this->db->where('id',$post_id);
+		return $this->db->update($userAccount, $like);
+
+	}
+
 }
