@@ -65,8 +65,11 @@ class Users_model extends CI_Model
 	}
 	public function create_post($data, $id)
 	{
-		$table_name = $this->db->get_where('users',array('id' => $id));
-		$this->db->insert($table_name,$data);
-	}
+		$this->db->select('username')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+         $result = $query->row()->username;
+         $this->db->insert($result,$data);
+     }
 
 }
