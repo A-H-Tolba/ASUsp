@@ -32,10 +32,27 @@ class Welcome extends CI_Controller {
 		}
         else {
         	$valid['valid']=TRUE;
+        	$config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['overwrite']             = TRUE;
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('userfile'))
+            {
+                    //$error = array('error' => $this->upload->display_errors());
+
+                    //$this->load->view('upload_form', $error);
+            }
+            else
+            {
+                    $data = array('upload_data' => $this->upload->data());
+                    $filename = $this->upload->data('file_name');
+            }
 			$data = array(
 				'email' => $this->input->post('email'),
-				'username' => $this->input->post('username'),
-				'Password'=> $this->input->post('password')
+				'fname' => $this->input->post('fname'),
+				'lname' => $this->input->post('lname'),
+				'Password'=> $this->input->post('password'),
+				'pic' => $filename
 			);
 			$this->Users_model->insertData($data);
 			redirect('Welcome/index');
@@ -57,7 +74,7 @@ class Welcome extends CI_Controller {
 			$this->session->set_userdata (array (
 					'email' => $userdata['email'] ,
 					'user_id' => $userdata['id'],
-					'user_name' => $userdata['username'],
+					'user_name' => $userdata['fname']." ".$userdata['lname'],
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );

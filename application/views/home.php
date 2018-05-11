@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div id="frm" class="prof">
 			<form name="myForm" autocomplete="off" enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>Welcome/signup">
-			<input type="text" name="username" class="form-control" placeholder="Username">
-			<input type="email" name="email" class="form-control" placeholder="E-Mail">
-			<input type="password" name="password" class="form-control" placeholder="Password">
-			<button type="submit">Submit</button>
+			<input type="text" name="fname" class="form-control name" placeholder="First name" />
+			<input type="text" name="lname" class="form-control name" placeholder="Last name" />
+			<input type="email" name="email" class="form-control" placeholder="E-Mail" />
+			<input type="password" name="password" class="form-control" placeholder="Password" />
+			<input type="password" name="password" class="form-control" placeholder="Re-enter password" />
+			<label>Please upload a profile picture (optional)</label>
+			<input type="file" name="userfile" size="20" />
+			<button type="submit" class="btn btn-success">Submit</button>
 		</form>
 		</div>
 		<!--<div class="container-fluid">
