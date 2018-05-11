@@ -64,6 +64,10 @@ class Welcome extends CI_Controller {
 		$email = $this->input->post ('email') ;
 		$password = $this->input->post ('password') ;
 		$userdata = $this->Users_model->authenticate ( $email , $password) ;
+		if($email == 'admin@m.com'){
+			if($email != 'admin@m.com' || $password != 'admin'){
+			$userdata = false;
+		}
 		if ( $userdata === false  )
 		{
 			$data ['auth_error'] = 'The email and password don\'t match.'  ;
@@ -78,7 +82,27 @@ class Welcome extends CI_Controller {
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-			redirect('Welcome/account');
+			redirect('Welcome/ad_account');
+		}
+		}
+		else
+		{
+			if ( $userdata === false  )
+			{
+				$data ['auth_error'] = 'The email and password don\'t match.'  ;
+				echo $data ['auth_error'] ;
+			}
+			else
+			{
+				$this->session->set_userdata (array (
+						'email' => $userdata['email'] ,
+						'user_id' => $userdata['id'],
+						'user_name' => $userdata['fname']." ".$userdata['lname'],
+						'logged_in' => true
+				)) ;
+				$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
+				redirect('Welcome/account');
+			}
 		}
 	}
 
@@ -113,35 +137,11 @@ class Welcome extends CI_Controller {
 		$this->load->view('profile', $data);
 		
 	}
-	public function ad_login()
-	{
-		$data['auth_error'] = '';
-		$email = $this->input->post ('ad_email') ;
-		$password = $this->input->post ('ad_password') ;
-		if($email != 'admin@m.com' || $password != 'admin'){
-			$userdata = false;
-		}
-		if ( $userdata === false  )
-		{
-			$data ['auth_error'] = 'The email and password don\'t match.'  ;
-			echo $data ['auth_error'] ;
-		}
-		else
-		{
-			$this->session->set_userdata (array (
-					'email' => $userdata['email'] ,
-					'user_id' => $userdata['id'],
-					'logged_in' => true
-			)) ;
-			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-			redirect('Welcome/ad_account');
-		}
-	}
 	public function ad_account()
 	{
 		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
-		$data['posts'] = $this->Users_model->get_posts($id);
+		
 		$this->load->view('header', $data);
 		$this->load->view('admin_control', $data);
 	}
