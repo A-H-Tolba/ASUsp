@@ -72,12 +72,14 @@ class Users_model extends CI_Model
 	}
 	public function create_post($data, $id)
 	{
-		$this->db->select('username')->from('users')->where('id' , $id);
+		$this->db->select('fname')->from('users')->where('id' , $id);
 		$query = $this->db->get();
-		if ($query->num_rows() > 0) {
-         $result = $query->row()->username;
-         $this->db->insert($result.$id,$data);
-     }
+		$fName = $query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+        $this->db->insert($fName.$lName.$id,$data);
+     
 	}
 	public function like_post($post_id,$userAccount)
 	{

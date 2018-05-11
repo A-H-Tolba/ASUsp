@@ -98,6 +98,7 @@ class Welcome extends CI_Controller {
 						'email' => $userdata['email'] ,
 						'user_id' => $userdata['id'],
 						'user_name' => $userdata['fname']." ".$userdata['lname'],
+						'tableName' => $userdata['fname'].$userdata['lname'].$userdata['id'],
 						'logged_in' => true
 				)) ;
 				$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
@@ -111,7 +112,8 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
 		$userName = $this->session->userdata['user_name'];
-		$data['posts'] = $this->Users_model->get_posts($userName.$id);
+		$tableName = $this->session->userdata['tableName'];
+		$data['posts'] = $this->Users_model->get_posts($tableName);
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
@@ -176,7 +178,8 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
  		$id = $this->session->userdata['user_id'];
  		$userName = $this->session->userdata['user_name'];
- 		$userAccount = $userName.$id;
+		$userAccount = $userName.$id;
+		$tableName = $this->session->userdata['tableName'];
  		$comment = $this->input->post('comment');
  		$this->load->library('form_validation');
  		$this->form_validation->set_rules('comment', 'Comment', 'required');
@@ -184,7 +187,7 @@ class Welcome extends CI_Controller {
  			$this->load->view('header', $data);
  			$this->load->view('profile', $data);
  		} else {
- 			$this->Users_model->create_comment($post_id,$userAccount,$comment);
+ 			$this->Users_model->create_comment($post_id,$tableName,$comment);
 			// $this->load->view('header', $data);
 		// $this->load->view('profile', $data);
 		redirect('Welcome/account');
@@ -197,7 +200,8 @@ class Welcome extends CI_Controller {
  		$id = $this->session->userdata['user_id'];
  		$userName = $this->session->userdata['user_name'];
 		$userAccount = $userName.$id;
-		$this->Users_model->like_post($post_id,$userAccount);
+		$tableName = $this->session->userdata['tableName'];
+		$this->Users_model->like_post($post_id,$tableName);
 		redirect('Welcome/account');
 	}
  
