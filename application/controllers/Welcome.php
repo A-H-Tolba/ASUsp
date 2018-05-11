@@ -52,7 +52,7 @@ class Welcome extends CI_Controller {
 				'fname' => $this->input->post('fname'),
 				'lname' => $this->input->post('lname'),
 				'Password'=> $this->input->post('password'),
-				'pic' => $filename
+				'pic' => ($filename)? $filename : 'default.png'
 			);
 			$this->Users_model->insertData($data);
 			redirect('Welcome/index');
