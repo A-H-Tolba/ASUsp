@@ -20,7 +20,7 @@ class Users_model extends CI_Model
 		);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_key('id', TRUE);
-		$this->dbforge->create_table($data['username'].$this->db->get_where('users',array('email'=>$data['email']))->result()[0]->id);
+		$this->dbforge->create_table($data['fname'].$data['lname'].$this->db->get_where('users',array('email'=>$data['email']))->result()[0]->id);
 	}
 	function authenticate ( $email , $password )
     {
