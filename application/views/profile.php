@@ -39,7 +39,7 @@
 <?php foreach(array_reverse($posts) as $post):?>
         
         <h2 style="text-align: center;"> <?php echo $post['content'];?> 
-		<h4 style="text-align: center;"><?php echo $post['comments'];?></h4>
+		<h4 style="text-align: center;"><?php echo nl2br($post['comments']);?></h4>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
 		<?php $liked = $post['likes']; 
