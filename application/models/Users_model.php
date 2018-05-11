@@ -56,10 +56,17 @@ class Users_model extends CI_Model
 	}
 	public function create_comment($post_id,$userAccount,$comment)
 	{
-		
+		$query = $this->db->query("SELECT comments FROM $userAccount WHERE id = $post_id;");
+		$comments = "";
+		foreach ($query->result() as $row)
+		{
+				$comments=$comments.$row->comments;
+				$comments=$comments."\n";
+		}
+		$comments=$comments.$comment;
 		$this->db->where('id',$post_id);
 		$comm = array(
-			'comments' => $comment,
+			'comments' => $comments,
 		);
 		return $this->db->update($userAccount, $comm);
 	}
