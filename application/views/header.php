@@ -32,7 +32,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<button id="btn-lgn" type="submit">Submit</button>
 				</form>
 				<?php ;} else { ?>
-					<a href="<?php echo base_url(); ?>Welcome/logout"><button id="btn-lgn">Log out</button></a>
+					<li><a href="<?php echo base_url(); ?>Welcome/account">Profile</a></li>
+					<li><a href="<?php echo base_url(); ?>Welcome/feed">Feed</a></li>
+					<li><a href="<?php echo base_url(); ?>Welcome/logout">Log out</a></li>
 				<?php ;} ?>
 		      </ul>
 		     

@@ -64,16 +64,12 @@ class Welcome extends CI_Controller {
 		$email = $this->input->post ('email') ;
 		$password = $this->input->post ('password') ;
 		$userdata = $this->Users_model->authenticate ( $email , $password) ;
-		if($email == 'admin@m.com'){
-			if($email != 'admin@m.com' || $password != 'admin'){
-			$userdata = false;
-		}
 		if ( $userdata === false  )
 		{
-			$data ['auth_error'] = 'The email and password don\'t match.'  ;
-			echo $data ['auth_error'] ;
+				$data ['auth_error'] = 'The email and password don\'t match.'  ;
+				echo $data ['auth_error'] ;
 		}
-		else
+		elseif ($email == 'admin@m.com' && $password == 'admin')
 		{
 			$this->session->set_userdata (array (
 					'email' => $userdata['email'] ,
@@ -84,27 +80,26 @@ class Welcome extends CI_Controller {
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
 			redirect('Welcome/ad_account');
 		}
-		}
 		else
 		{
-			if ( $userdata === false  )
-			{
-				$data ['auth_error'] = 'The email and password don\'t match.'  ;
-				echo $data ['auth_error'] ;
-			}
-			else
-			{
-				$this->session->set_userdata (array (
-						'email' => $userdata['email'] ,
-						'user_id' => $userdata['id'],
-						'user_name' => $userdata['fname']." ".$userdata['lname'],
-						'tableName' => $userdata['fname'].$userdata['lname'].$userdata['id'],
-						'logged_in' => true
-				)) ;
-				$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-				redirect('Welcome/account');
-			}
+			$this->session->set_userdata (array (
+					'email' => $userdata['email'] ,
+					'user_id' => $userdata['id'],
+					'user_name' => $userdata['fname']." ".$userdata['lname'],
+					'tableName' => $userdata['fname'].$userdata['lname'].$userdata['id'],
+					'pic' => $userdata['pic'],
+					'logged_in' => true
+			)) ;
+			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
+			redirect('Welcome/account');
 		}
+	}
+
+	public function feed()
+	{
+		$data['session'] = $this->session->userdata;
+		$this->load->view('header', $data);
+		$this->load->view('feed', $data);
 	}
 
 	public function account()
