@@ -40,7 +40,7 @@ class Users_model extends CI_Model
     }
     	public function search($username)
     {
-      $this->db->like('username',$username);
+      $this->db->like('fname',$username);
       $query = $this->db->get('users');
       return $query->result();
 	}
