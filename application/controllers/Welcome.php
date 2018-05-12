@@ -166,7 +166,7 @@ class Welcome extends CI_Controller {
 				'content' => $this->input->post('body'),
 			);
 		$this->Users_model->create_post($data,$id);
-		redirect('Welcome/account');
+		redirect('Welcome/feed');
 	}
 
 	public function addComment($post_id)
@@ -186,7 +186,7 @@ class Welcome extends CI_Controller {
  			$this->Users_model->create_comment($post_id,$tableName,$comment);
 			// $this->load->view('header', $data);
 		// $this->load->view('profile', $data);
-		redirect('Welcome/account');
+		redirect('Welcome/feed');
  		}
 	 }
 	 
@@ -198,7 +198,7 @@ class Welcome extends CI_Controller {
 		$userAccount = $userName.$id;
 		$tableName = $this->session->userdata['tableName'];
 		$this->Users_model->like_post($post_id,$tableName);
-		redirect('Welcome/account');
+		redirect('Welcome/feed');
 	}
  
 }
