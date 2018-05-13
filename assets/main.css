@@ -11,3 +11,5 @@ body { background: linear-gradient(#000, #000, #333, #aaa); }
 #login {margin-top: 1.5em;}
 .login {position: relative; top: 75%; display: inline-block; width: 40%;}
 #post textarea {width: 50%; margin-left:25%;}
+#pp {width: 10em; height: 10em; margin-left: calc(50% - 5em);}
+#wp {text-align: center; font-size: 1.6em;}

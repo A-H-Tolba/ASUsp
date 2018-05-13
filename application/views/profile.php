@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<input type="submit" name="submit" value="Search">
 </form>
 <hr>
-<img id="pp" src="<?php echo base_url()."/uploads/".$session['pic']; ?>"/> 
+<img id="pp" src="<?php echo base_url()."/uploads/".$session['pic']; ?>"/>
+<p id="wp">Welcome to <?php echo $session['user_name']; ?>'s profile.</p>
 </body>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery-3.2.1.min.js"></script>
