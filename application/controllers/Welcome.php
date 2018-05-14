@@ -222,27 +222,14 @@ class Welcome extends CI_Controller {
 		$id = $this->session->userdata['user_id'];
 		$data['suggestions'] = $this->Users_model->get_suggestions($id);
 	}
+	public function pending_requests()
+	{
+		$data['session'] = $this->session->userdata;
+		$id_user = $this->session->userdata['user_id'];
+		$id_friend = $this->input->get('c');
+		$this->Users_model->send_request($id_user,$id_friend);
+	}
  
-}
-class friendcontroller extends  CI_Controller
-{ 
-	public function getIndex()
-	{ $friend= Auth :: user()->friends();
-	  $requests = Auth :: user()->friendRequests();
-
-
-	  return view ('friends.index')
-	  ->with('friends',$friends)
-      ->with('requests',$requests);
-
-	}
-	
-	
-	public function getAdd($username)
-	{ dd($username);
-
-	}
-
 }
 
 
