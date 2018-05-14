@@ -16,7 +16,8 @@ class Users_model extends CI_Model
         	'data' => array('type' => 'ENUM("post","friend")', 'null' => FALSE),
         	'content' => array('type' => 'TEXT', 'null' => FALSE),
         	'comments' => array('type' => 'TEXT'),
-        	'likes' => array('type' => 'TEXT')
+        	'likes' => array('type' => 'TEXT'),
+		'pending_requests'=> array('type' => 'TEXT')
 		);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_key('id', TRUE);
