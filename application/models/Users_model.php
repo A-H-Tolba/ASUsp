@@ -118,5 +118,19 @@ class Users_model extends CI_Model
 	{
 		
 	}
+	public function send_request($id_user,$id_friend)
+	{
+		$this->db->select('fname')->from('users')->where('id' , $id_friend);
+		$query = $this->db->get();
+		$fName = $query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id_friend);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+		$tableName = $fName.$lName.$id_friend;
+		$PR = array(
+			'pending_requests' => $id_user,
+		);
+		return $this->db->insert($fName.$lName.$id_friend, $PR);
+	}
 
 }
