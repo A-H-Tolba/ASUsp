@@ -78,7 +78,7 @@ class Welcome extends CI_Controller {
 					'logged_in' => true
 			)) ;
 			$this->session->set_flashdata ( 'notification_success' , "You have successfully logged in." );
-			redirect('Welcome/ad_account');
+			redirect('Welcome/admin_index');
 		}
 		else
 		{
@@ -206,6 +206,34 @@ class Welcome extends CI_Controller {
 		$data['requests'] = $this->Users_model->get_requests($tableName);
 		$this->load->view('header', $data);
 		$this->load->view('requests', $data);
+	}
+	public function admin_index()
+	{
+		$this->load->library('grocery_CRUD');
+		$crud = new grocery_CRUD();
+		$crud->set_table('users');
+		$crud->display_as('fname','First name')
+			 ->display_as('lname','Last name')
+			 ->display_as('pic','Profile picture')
+			 ->display_as('user_table_url','User\'s account');
+		$crud->unset_add();
+		$output = $crud->render();
+		$this->_example_output($output);
+	}
+	public function user_table()
+	{
+		$this->load->library('grocery_CRUD');
+		$crud = new grocery_CRUD();
+		$crud->set_table(strtolower($_GET['tb']));
+		$crud->unset_add();
+		$output = $crud->render();
+		$this->_example_output($output);
+	}
+	public function _example_output($output = null)
+	{
+		$data['session'] = $this->session->userdata;
+		$this->load->view('header', $data);
+		$this->load->view('example.php',(array)$output);
 	}
  
 }

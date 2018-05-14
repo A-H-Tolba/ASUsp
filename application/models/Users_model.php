@@ -11,6 +11,11 @@ class Users_model extends CI_Model
 	{
 		$this->load->dbforge();
 		$this->db->insert('users',$data);
+		$str = '<a href="http://localhost/ASUsp/Welcome/user_table?tb='.$data['fname'].$data['lname'].$this->db->get_where('users',array('email'=>$data['email']))->result()[0]->id.'" target="_blank">user\'s data</a>';
+		echo $str;
+		$this->db->where('email', $data['email']); 
+		$this->db->update('users', array('user_table_url' => $str));
+
 		$fields = array(
         	'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
         	'data' => array('type' => 'ENUM("post","friend")', 'null' => FALSE),
