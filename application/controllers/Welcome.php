@@ -198,6 +198,15 @@ class Welcome extends CI_Controller {
 		$this->Users_model->like_post($post_id,$tableName);
 		redirect('Welcome/feed');
 	}
+
+	public function requests()
+	{
+		$data['session'] = $this->session->userdata;
+		$tableName = $this->session->userdata['tableName'];
+		$data['requests'] = $this->Users_model->get_requests($tableName);
+		$this->load->view('header', $data);
+		$this->load->view('requests', $data);
+	}
  
 }
 class friendcontroller extends  CI_Controller

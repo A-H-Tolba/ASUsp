@@ -108,4 +108,10 @@ class Users_model extends CI_Model
 
 	}
 
+	public function get_requests($tableName)
+	{
+		$query = $this->db->get_where($tableName , array('data' => 'request'));
+		return $query->result_array();
+	}
+
 }
