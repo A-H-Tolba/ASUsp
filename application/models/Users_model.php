@@ -13,7 +13,7 @@ class Users_model extends CI_Model
 		$this->db->insert('users',$data);
 		$fields = array(
         	'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-        	'data' => array('type' => 'ENUM("post","friend")', 'null' => FALSE),
+        	'data' => array('type' => 'ENUM("post","friend","pending_request")', 'null' => FALSE),
         	'content' => array('type' => 'TEXT', 'null' => FALSE),
         	'comments' => array('type' => 'TEXT'),
         	'likes' => array('type' => 'TEXT'),
