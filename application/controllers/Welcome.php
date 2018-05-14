@@ -102,6 +102,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('feed', $data);
 	}
+	public function f_feed()
+	{
+		$data['session'] = $this->session->userdata;
+		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['tableName']);
+		$this->load->view('header', $data);
+		$this->load->view('feed', $data);
+	}
+
 
 	public function account()
 	{
@@ -207,6 +215,19 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('requests', $data);
 	}
+	public function suggestion()
+	{
+		$data['session'] = $this->session->userdata;
+		$id = $this->session->userdata['user_id'];
+		$data['suggestions'] = $this->Users_model->get_suggestions($id);
+	}
+	public function pending_requests()
+	{
+		$data['session'] = $this->session->userdata;
+		$id_user = $this->session->userdata['user_id'];
+		$id_friend = $this->input->get('c');
+		$this->Users_model->send_request($id_user,$id_friend);
+	}
 	public function admin_index()
 	{
 		$this->load->library('grocery_CRUD');
@@ -236,26 +257,6 @@ class Welcome extends CI_Controller {
 		$this->load->view('example.php',(array)$output);
 	}
  
-}
-class friendcontroller extends  CI_Controller
-{ 
-	public function getIndex()
-	{ $friend= Auth :: user()->friends();
-	  $requests = Auth :: user()->friendRequests();
-
-
-	  return view ('friends.index')
-	  ->with('friends',$friends)
-      ->with('requests',$requests);
-
-	}
-	
-	
-	public function getAdd($username)
-	{ dd($username);
-
-	}
-
 }
 
 

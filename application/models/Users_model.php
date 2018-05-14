@@ -18,10 +18,11 @@ class Users_model extends CI_Model
 
 		$fields = array(
         	'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-        	'data' => array('type' => 'ENUM("post","friend")', 'null' => FALSE),
+        	'data' => array('type' => 'ENUM("post","friend","pending_request")', 'null' => FALSE),
         	'content' => array('type' => 'TEXT', 'null' => FALSE),
         	'comments' => array('type' => 'TEXT'),
-        	'likes' => array('type' => 'TEXT')
+        	'likes' => array('type' => 'TEXT'),
+		'pending_requests'=> array('type' => 'TEXT')
 		);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_key('id', TRUE);
@@ -117,6 +118,25 @@ class Users_model extends CI_Model
 	{
 		$query = $this->db->get_where($tableName , array('data' => 'request'));
 		return $query->result_array();
+	}
+
+	public function get_suggestions($id)
+	{
+		
+	}
+	public function send_request($id_user,$id_friend)
+	{
+		$this->db->select('fname')->from('users')->where('id' , $id_friend);
+		$query = $this->db->get();
+		$fName = $query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id_friend);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+		$tableName = $fName.$lName.$id_friend;
+		$PR = array(
+			'pending_requests' => $id_user,
+		);
+		return $this->db->insert($fName.$lName.$id_friend, $PR);
 	}
 
 }
