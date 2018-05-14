@@ -207,6 +207,13 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('requests', $data);
 	}
+
+	public function suggestion()
+	{
+		$data['session'] = $this->session->userdata;
+		$id = $this->session->userdata['user_id'];
+		$data['suggestions'] = $this->Users_model->get_suggestions($id);
+	}
  
 }
 class friendcontroller extends  CI_Controller
