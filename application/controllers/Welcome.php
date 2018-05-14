@@ -102,6 +102,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('feed', $data);
 	}
+	public function f_feed()
+	{
+		$data['session'] = $this->session->userdata;
+		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['tableName']);
+		$this->load->view('header', $data);
+		$this->load->view('feed', $data);
+	}
+
 
 	public function account()
 	{
