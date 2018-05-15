@@ -1,5 +1,5 @@
 html, body {height: 100%; width: 100%; margin: 0;}
-body { background: linear-gradient(#000, #000, #333, #aaa); }
+#background { position: fixed; width: 100%; height: 100%; z-index: -2; background: linear-gradient(#000, #000, #333, #aaa); }
 .navbar {background-color: #ECC833; border-color: #ECC833; width: 100%; border-radius: 0;}
 #asui {position: absolute; bottom: 10px;}
 #frm {width: 30%; margin-right: 5%; float: right; margin-top: 2em; background: rgba(250,235,210,0.3); border-radius: 5px;}
@@ -10,6 +10,8 @@ body { background: linear-gradient(#000, #000, #333, #aaa); }
 #btn-lgn {background: rgba(0,0,0,0); border: none; color: #ed1;}
 #login {margin-top: 1.5em;}
 .login {position: relative; top: 75%; display: inline-block; width: 40%;}
-#post textarea {width: 50%; margin-left:25%;}
+#wpost textarea {width: 50%; margin-left:25%;}
 #pp {width: 10em; height: 10em; margin-left: calc(50% - 5em);}
 #wp {text-align: center; font-size: 1.6em;}
+#rpost {background-color: #f0e9cc; width: 50%; margin-left: 25%;}
+#rpost p {font-size: 1.06em;}

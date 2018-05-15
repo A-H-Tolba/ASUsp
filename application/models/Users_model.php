@@ -224,4 +224,32 @@ class Users_model extends CI_Model
 		else {return false;}
 	}
 
+	public function get_fPosts($id,$tableName)
+	{
+		$query = $this->db->get_where($tableName , array('data' => 'friend'));
+		$friends = $query->result_array();
+		$fPosts = array();
+		if(count($friends) != 0)
+		{
+			foreach($friends as $friend)
+			{
+				$this->db->select('fname')->from('users')->where('id' , $friend['pending_requests']);
+				$query = $this->db->get();
+				$tfName =$query->row()->fname;
+				$this->db->select('lname')->from('users')->where('id' , $friend['pending_requests']);
+				$query = $this->db->get();
+				$tlName = $query->row()->lname;
+				$table = $tfName.$tlName.$friend['pending_requests'];
+
+				$query = $this->db->get_where($table , array('data' => 'post'));
+				$posts = $query->result_array();
+
+				foreach($posts as $post){
+					array_push($fPosts,$post);
+				}
+			}
+		}
+		return $fPosts;
+	}
+
 }

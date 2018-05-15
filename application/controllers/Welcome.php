@@ -101,6 +101,7 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['tableName']);
+		$data['fPosts'] = $this->Users_model->get_fPosts($this->session->userdata['user_id'],$this->session->userdata['tableName']);
 		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('feed', $data);
