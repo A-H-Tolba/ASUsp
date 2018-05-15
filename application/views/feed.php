@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="button" style="color: <?=getColor($liked)?>;" value = "<?=getValue($liked)?>" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);?>'" class="btn btn-md btn-default"></input>
 		<br>
 		<br>
-		<?php echo form_open('Welcome/addComment/'.$post['id']); ?>
+		<?php echo form_open('Welcome/addComment/'.$post['id'].'/'.$session['tableName']); ?>
 		<input type="text" name = "comment" placeholder="add comment" >
 		<input type="submit" name="submit" value="Comment">
 		</form>

@@ -189,7 +189,6 @@ class Welcome extends CI_Controller {
  		$id = $this->session->userdata['user_id'];
  		$userName = $this->session->userdata['user_name'];
 		$userAccount = $userName.$id;
-		$tableName = $this->session->userdata['tableName'];
  		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data['session']['user_name'].'</a>'." Commented : ".$this->input->post('comment');
  		$this->load->library('form_validation');
  		$this->form_validation->set_rules('comment', 'Comment', 'required');
