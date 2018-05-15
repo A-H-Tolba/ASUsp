@@ -285,6 +285,6 @@ class Welcome extends CI_Controller {
 		redirect('Welcome/feed');
 	}
 
-
+}
 
 

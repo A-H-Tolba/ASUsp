@@ -166,12 +166,6 @@ class Users_model extends CI_Model
 		return $this->db->update($tableName, $comm);
 	}
 
-	public function rejectFriend($request,$tableName)
-	{
-		$this->db->where('pending_requests',$request);
-		$this -> db -> delete($tableName);
-	}
-
 	public function addFriend($request,$tableName,$id)
 	{
 		$this->db->select('fname')->from('users')->where('id' , $id);
