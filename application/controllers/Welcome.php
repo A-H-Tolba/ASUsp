@@ -208,10 +208,11 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
 		$data['writer'] = $this->Users_model->get_friend($writer_id);
  		$id = $data['writer'][0]['id'];
+		$nid = $this->session->userdata['user_id'];
  		$fName = $data['writer'][0]['fname'];
 		$lName = $data['writer'][0]['lname'];
 		$tableName = $fName.$lName.$id;
- 		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data['session']['user_name'].'</a>'." Commented : ".$this->input->post('comment');
+ 		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$nid.'">'.$data['session']['user_name'].'</a>'." Commented : ".$this->input->post('comment');
  		$this->load->library('form_validation');
  		$this->form_validation->set_rules('comment', 'Comment', 'required');
  		if($this->form_validation->run() === FALSE){
