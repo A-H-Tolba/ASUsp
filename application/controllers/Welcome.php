@@ -99,15 +99,8 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['tableName']);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		$data['fPosts'] = $this->Users_model->get_fPosts($this->session->userdata['user_id'],$this->session->userdata['tableName']);
-=======
 		$data['friendStatus'] = false;
->>>>>>> 360b3e93efb7276d05b205865561ae6d56ced322
-=======
-		$data['friendStatus'] = false;
->>>>>>> e4307508a301838ee7511cb878f249f06f79f80a
 		$this->load->view('header', $data);
 		$this->load->view('feed', $data);
 	}
