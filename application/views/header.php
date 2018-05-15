@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<li><a href="<?php echo base_url(); ?>Welcome/logout">Log out</a></li>
 					<?php 
 					if($friendStatus) { ?>
-					<li><a href="<?php echo site_url("Welcome/f_feed/".$friendInfo[0]->id); ?>"><?php echo $friendInfo[0]['fname'] ;?>'s Feed</a></li>
+					<li><a href="<?php echo site_url("Welcome/f_feed/".$friendInfo[0]['id']); ?>"><?php echo $friendInfo[0]['fname'] ;?>'s Feed</a></li>
 				<?php ;} ;}  ?>
 		      </ul>
 		     

@@ -103,14 +103,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('feed', $data);
 	}
-	public function f_feed($friend_id = NULL)
+	public function f_feed($friend_id)
 	{
 		$data['session'] = $this->session->userdata;
 		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['tableName']);
 		$data['friendInfo'] = $this->Users_model->get_friend($friend_id);
-		$data['friendStatus'] = false;
+		$data['friendStatus'] = true;
 		$this->load->view('header', $data);
-		$this->load->view('feed', $data);
+		$this->load->view('Ffeed', $data);
 	}
 
 
