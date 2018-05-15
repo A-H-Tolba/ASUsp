@@ -12,6 +12,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main.css">
 </head>
 <body>
+	<div id="background">
+		<img src="<?php echo base_url(); ?>assets/asu.png" id="asui">
+	</div>
 	<nav class="navbar navbar-inverse navbar-fixed">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
@@ -45,4 +48,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    </div>
 		  </div>
 		</nav>
-		<img src="<?php echo base_url(); ?>assets/asu.png" id="asui">
