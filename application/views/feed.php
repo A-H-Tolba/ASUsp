@@ -34,8 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php foreach(array_reverse($posts) as $post):?>
         
-        <div id="rpost"><p><?php echo nl2br($post['content']);?></div>
-		<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
+<h2 style="text-align: center;"> <?php echo nl2br($post['content']);?> </h2>
+<h4 style="text-align: center;"><?php echo nl2br($post['comments']);?></h4>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
 		<?php $liked = $post['likes']; 
