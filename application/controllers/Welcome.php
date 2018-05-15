@@ -183,7 +183,7 @@ class Welcome extends CI_Controller {
 		redirect('Welcome/feed');
 	}
 
-	public function addComment($post_id)
+	public function addComment($post_id,$table)
  	{
 		$data['session'] = $this->session->userdata;
  		$id = $this->session->userdata['user_id'];
@@ -197,7 +197,7 @@ class Welcome extends CI_Controller {
  			$this->load->view('header', $data);
  			$this->load->view('profile', $data);
  		} else {
- 			$this->Users_model->create_comment($post_id,$tableName,$comment);
+ 			$this->Users_model->create_comment($post_id,$table,$comment);
 			// $this->load->view('header', $data);
 		// $this->load->view('profile', $data);
 		redirect('Welcome/feed');
@@ -224,14 +224,14 @@ class Welcome extends CI_Controller {
 		redirect('Welcome/f_feed/'.$id);
  		}
 	 }
-	public function Like($post_id)
+	public function Like($post_id,$table)
 	{
 		$data['session'] = $this->session->userdata;
  		$id = $this->session->userdata['user_id'];
  		$userName = $this->session->userdata['user_name'];
 		$userAccount = $userName.$id;
 		$tableName = $this->session->userdata['tableName'];
-		$this->Users_model->like_post($post_id,$tableName);
+		$this->Users_model->like_post($post_id,$table);
 		redirect('Welcome/feed');
 	}
 	public function fLike($writer_id,$post_id)

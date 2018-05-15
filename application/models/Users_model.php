@@ -243,8 +243,9 @@ class Users_model extends CI_Model
 
 				$query = $this->db->get_where($table , array('data' => 'post'));
 				$posts = $query->result_array();
-
+				
 				foreach($posts as $post){
+					$post['table'] = $table;
 					array_push($fPosts,$post);
 				}
 			}
