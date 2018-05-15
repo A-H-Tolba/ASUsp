@@ -259,7 +259,6 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('example.php',(array)$output);
 	}
-
 	public function getFriend($friend_id)
 	{
 		$data['session'] = $this->session->userdata;
