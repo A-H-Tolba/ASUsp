@@ -166,6 +166,39 @@ class Users_model extends CI_Model
 		return $this->db->update($tableName, $comm);
 	}
 
+	public function addFriend($request,$tableName,$id)
+	{
+		$this->db->select('fname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$fName =$query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+		$this->db->select('id')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$uid = $query->row()->id;
+
+		$this->db->select('fname')->from('users')->where('id' , $request);
+		$query = $this->db->get();
+		$tfName =$query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $request);
+		$query = $this->db->get();
+		$tlName = $query->row()->lname;
+		$this->db->select('id')->from('users')->where('id' , $request);
+		$query = $this->db->get();
+		$tid = $query->row()->id;
+
+		$table = $tfName.$tlName.$tid;
+
+		$comm = array(
+			'data' => 'friend',
+			'content' => 'http://localhost/ASUsp/Welcome/account/'.$fName.$lName.$uid,
+			'comments' => $fName." ".$lName,
+		);
+		return $this->db->insert($table, $comm);
+
+	}
+
 	public function rejectFriend($request,$tableName)
 	{
 		$this->db->where('pending_requests',$request);
