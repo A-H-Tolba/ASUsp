@@ -194,6 +194,7 @@ class Users_model extends CI_Model
 			'data' => 'friend',
 			'content' => 'http://localhost/ASUsp/Welcome/account/'.$fName.$lName.$uid,
 			'comments' => $fName." ".$lName,
+			'pending_requests' => $uid,
 		);
 		return $this->db->insert($table, $comm);
 
