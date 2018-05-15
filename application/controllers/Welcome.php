@@ -61,6 +61,8 @@ class Welcome extends CI_Controller {
 	public function login()
 	{
 		$data['auth_error'] = '';
+
+		$data['friendStatus'] = false;
 		$email = $this->input->post ('email') ;
 		$password = $this->input->post ('password') ;
 		$userdata = $this->Users_model->authenticate ( $email , $password) ;
@@ -271,6 +273,8 @@ class Welcome extends CI_Controller {
 	}
 	public function admin_index()
 	{
+
+		$data['friendStatus'] = false;
 		$this->load->library('grocery_CRUD');
 		$crud = new grocery_CRUD();
 		$crud->set_table('users');
@@ -293,6 +297,8 @@ class Welcome extends CI_Controller {
 	}
 	public function _example_output($output = null)
 	{
+		
+		$data['friendStatus'] = false;
 		$data['session'] = $this->session->userdata;
 		$this->load->view('header', $data);
 		$this->load->view('example.php',(array)$output);
