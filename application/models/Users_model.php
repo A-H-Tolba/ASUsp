@@ -46,9 +46,22 @@ class Users_model extends CI_Model
     }
     	public function search($username)
     {
-      $this->db->like('fname',$username);
-      $query = $this->db->get('users');
-      return $query->result();
+    	$space = strrpos($username, " ");
+    	if ($space)
+    	{
+    		$fname = substr($username, 0, $space);
+    		$lname = substr($username, $space+1);
+    		$this->db->like('fname',$fname);
+		    $this->db->like('lname',$lname);
+		    $query = $this->db->get('users');
+    	}
+    	else
+    	{
+    		$this->db->like('fname',$username);
+		    $this->db->or_like('lname',$username);
+		    $query = $this->db->get('users');
+    	}
+	    return $query->result();
 	}
 	
 	public function get_posts($tableName)
