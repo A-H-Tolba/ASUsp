@@ -260,7 +260,23 @@ class Users_model extends CI_Model
 				$tlName = $query->row()->lname;
 				$table = $tfName.$tlName.$user_id;
 				$query = $this->db->get_where($table , array('data' => 'friend'));
-				return $query->result_array();
+				$friends = $query->result_array();
+				$friendsl = array();
+				foreach ($friends as $friend) {
+					$id = $friend['pending_requests'];
+					$this->db->select('fname')->from('users')->where('id',$id);
+					$query = $this->db->get();
+					$fName =$query->row()->fname;
+					$this->db->select('lname')->from('users')->where('id',$id);
+					$query = $this->db->get();
+					$lName = $query->row()->lname;
+					$this->db->select('pic')->from('users')->where('id',$id);
+					$query = $this->db->get();
+					$pic = $query->row()->pic;
+					array_push($friendsl, $id ,$fName.' '.$lName,$pic); 
+				}
+				return $friendsl;
 	}
+
 
 }
