@@ -226,7 +226,9 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
 		$id_user = $this->session->userdata['user_id'];
 		$id_friend = $this->input->get('c');
-		$this->Users_model->send_request($id_user,$id_friend);
+		$this->Users_model->send_request($id_user,$id_friend,$data['session']);
+			redirect('Welcome/account');
+
 	}
 	public function admin_index()
 	{
@@ -263,10 +265,6 @@ class Welcome extends CI_Controller {
 		$data['friendInfo'] = $this->Users_model->get_friend($friend_id);
 		$this->load->view('header', $data);
 		$this->load->view('Fprofile', $data);
-	}
-	public function getRequest()
-	{
-		
 	}
  
 }

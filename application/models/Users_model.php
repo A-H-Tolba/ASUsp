@@ -132,9 +132,20 @@ class Users_model extends CI_Model
 		$this->db->select('lname')->from('users')->where('id' , $id_friend);
 		$query = $this->db->get();
 		$lName = $query->row()->lname;
+		$this->db->select('user_table_url')->from('users')->where('id' , $id_user);
+		$query = $this->db->get();
+		$content = $query->row()->user_table_url;
+		$this->db->select('fname')->from('users')->where('id' , $id_user);
+		$query = $this->db->get();
+		$fName1 =$query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id_user);
+		$query = $this->db->get();
+		$lName1 = $query->row()->lname;
 		$tableName = $fName.$lName.$id_friend;
 		$PR = array(
 			'data' => 'pending_request',
+			'content' => $content,
+			'comments' => $fName1.' '.$lName1,
 			'pending_requests' => $id_user,
 		);
 		return $this->db->insert($fName.$lName.$id_friend, $PR);
