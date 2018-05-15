@@ -271,7 +271,9 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$tableName = $this->session->userdata['tableName'];
+		$id = $this->session->userdata['user_id'];
 		$this->Users_model->acceptFriend($request,$tableName);
+		$this->Users_model->addFriend($request,$tableName,$id);
 		redirect('Welcome/feed');
 	}
 
