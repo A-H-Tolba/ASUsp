@@ -157,4 +157,19 @@ class Users_model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function acceptFriend($request,$tableName)
+	{
+		$this->db->where('pending_requests',$request);
+		$comm = array(
+			'data' => 'friend',
+		);
+		return $this->db->update($tableName, $comm);
+	}
+
+	public function rejectFriend($request,$tableName)
+	{
+		$this->db->where('pending_requests',$request);
+		$this -> db -> delete($tableName);
+	}
+
 }

@@ -266,6 +266,22 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('Fprofile', $data);
 	}
+
+	public function accept($request)
+	{
+		$data['session'] = $this->session->userdata;
+		$tableName = $this->session->userdata['tableName'];
+		$this->Users_model->acceptFriend($request,$tableName);
+		redirect('Welcome/feed');
+	}
+
+	public function reject($request)
+	{
+		$data['session'] = $this->session->userdata;
+		$tableName = $this->session->userdata['tableName'];
+		$this->Users_model->rejectFriend($request,$tableName);
+		redirect('Welcome/feed');
+	}
  
 }
 
