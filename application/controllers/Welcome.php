@@ -256,6 +256,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('example.php',(array)$output);
 	}
+
+	public function getFriend($friend_id)
+	{
+		$data['session'] = $this->session->userdata;
+		$data['friendInfo'] = $this->Users_model->get_friend($friend_id);
+		$this->load->view('header', $data);
+		$this->load->view('Fprofile', $data);
+	}
  
 }
 

@@ -139,4 +139,10 @@ class Users_model extends CI_Model
 		return $this->db->insert($fName.$lName.$id_friend, $PR);
 	}
 
+	public function get_friend($friend_id)
+	{
+		$query = $this->db->get_where('users' , array('id' => $friend_id));
+		return $query->result_array();
+	}
+
 }
