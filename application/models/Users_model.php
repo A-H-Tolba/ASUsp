@@ -116,7 +116,7 @@ class Users_model extends CI_Model
 
 	public function get_requests($tableName)
 	{
-		$query = $this->db->get_where($tableName , array('data' => 'request'));
+		$query = $this->db->get_where($tableName , array('data' => 'pending_request'));
 		return $query->result_array();
 	}
 
