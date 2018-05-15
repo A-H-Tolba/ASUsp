@@ -171,5 +171,23 @@ class Users_model extends CI_Model
 		$this->db->where('pending_requests',$request);
 		$this -> db -> delete($tableName);
 	}
+	public function is_friend($friend_id,$user_id)
+	{
+		$this->db->select('fname')->from('users')->where('id' , $user_id);
+		$query = $this->db->get();
+		$fName =$query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $user_id);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+		$tableName = $fName.$lName.$user_id;
+		$this->db->select('data')->from($tableName)->where('pending_requests', $friend_id);
+		$query = $this->db->get();
+		$status = $query->result_array();
+		
+		if ($status[0]['data'] == 'friend'){
+			return true;
+		}
+		else {return false;}
+	}
 
 }

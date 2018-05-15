@@ -36,9 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<li><a href="<?php echo base_url(); ?>Welcome/feed">Feed</a></li>
 					<li><a href="<?php echo base_url(); ?>Welcome/requests">Friend requests</a></li>
 					<li><a href="<?php echo base_url(); ?>Welcome/logout">Log out</a></li>
-					<!-- <?php if(friend) { ?>
-					<li><a href="<?php echo base_url(); ?>Welcome/f_feed"><?php echo 'name' ;?>'s Feed</a></li> -->
-				<?php ;} ;} ?>
+					<?php 
+					if($friendStatus) { ?>
+					<li><a href="<?php echo base_url(); ?>Welcome/f_feed"><?php echo $friendInfo[0]['fname'] ;?>'s Feed</a></li>
+				<?php ;} ;}  ?>
 		      </ul>
 		     
 		    </div>

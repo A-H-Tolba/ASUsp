@@ -116,6 +116,7 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
 		$tableName = $this->session->userdata['tableName'];
 		$data['posts'] = $this->Users_model->get_posts($tableName);
+		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
@@ -226,7 +227,7 @@ class Welcome extends CI_Controller {
 		$data['session'] = $this->session->userdata;
 		$id_user = $this->session->userdata['user_id'];
 		$id_friend = $this->input->get('c');
-		$this->Users_model->send_request($id_user,$id_friend,$data['session']);
+		$this->Users_model->send_request($id_user,$id_friend);
 			redirect('Welcome/account');
 
 	}
@@ -263,24 +264,9 @@ class Welcome extends CI_Controller {
 	{
 		$data['session'] = $this->session->userdata;
 		$data['friendInfo'] = $this->Users_model->get_friend($friend_id);
+		$data['friendStatus'] = $this->Users_model->is_friend($friend_id,$this->session->userdata['user_id']);
 		$this->load->view('header', $data);
 		$this->load->view('Fprofile', $data);
-	}
-
-	public function accept($request)
-	{
-		$data['session'] = $this->session->userdata;
-		$tableName = $this->session->userdata['tableName'];
-		$this->Users_model->acceptFriend($request,$tableName);
-		redirect('Welcome/feed');
-	}
-
-	public function reject($request)
-	{
-		$data['session'] = $this->session->userdata;
-		$tableName = $this->session->userdata['tableName'];
-		$this->Users_model->rejectFriend($request,$tableName);
-		redirect('Welcome/feed');
 	}
  
 }
