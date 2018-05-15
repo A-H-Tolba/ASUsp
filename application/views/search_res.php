@@ -19,5 +19,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
  
- 
-<a href="{{route(friend.add',['username'=>$user->username])}}" class="btn btn-primary">Add as friend </a>
