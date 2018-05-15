@@ -200,7 +200,27 @@ class Welcome extends CI_Controller {
 		redirect('Welcome/feed');
  		}
 	 }
-	 
+	 public function faddComment($writer_id,$post_id)
+ 	{
+		$data['session'] = $this->session->userdata;
+		$data['writer'] = $this->Users_model->get_friend($writer_id);
+ 		$id = $data['writer'][0]['id'];
+ 		$fName = $data['writer'][0]['fname'];
+		$lName = $data['writer'][0]['lname'];
+		$tableName = $fName.$lName.$id;
+ 		$comment = $this->input->post('comment');
+ 		$this->load->library('form_validation');
+ 		$this->form_validation->set_rules('comment', 'Comment', 'required');
+ 		if($this->form_validation->run() === FALSE){
+ 			$this->load->view('header', $data);
+ 			$this->load->view('profile', $data);
+ 		} else {
+ 			$this->Users_model->create_comment($post_id,$tableName,$comment);
+			// $this->load->view('header', $data);
+		// $this->load->view('profile', $data);
+		redirect('Welcome/f_feed/'.$id);
+ 		}
+	 }
 	public function Like($post_id)
 	{
 		$data['session'] = $this->session->userdata;
@@ -210,6 +230,17 @@ class Welcome extends CI_Controller {
 		$tableName = $this->session->userdata['tableName'];
 		$this->Users_model->like_post($post_id,$tableName);
 		redirect('Welcome/feed');
+	}
+	public function fLike($writer_id,$post_id)
+	{
+		$data['session'] = $this->session->userdata;
+		$data['writer'] = $this->Users_model->get_friend($writer_id);
+ 		$id = $data['writer'][0]['id'];
+ 		$fName = $data['writer'][0]['fname'];
+		$lName = $data['writer'][0]['lname'];
+		$tableName = $fName.$lName.$id;
+		$this->Users_model->like_post($post_id,$tableName);
+		redirect('Welcome/f_feed/'.$id);
 	}
 
 	public function requests()
