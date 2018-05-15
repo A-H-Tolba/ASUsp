@@ -264,6 +264,10 @@ class Welcome extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('Fprofile', $data);
 	}
+	public function getRequest()
+	{
+		
+	}
  
 }
 

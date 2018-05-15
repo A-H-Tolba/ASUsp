@@ -134,6 +134,7 @@ class Users_model extends CI_Model
 		$lName = $query->row()->lname;
 		$tableName = $fName.$lName.$id_friend;
 		$PR = array(
+			'data' => 'pending_request',
 			'pending_requests' => $id_user,
 		);
 		return $this->db->insert($fName.$lName.$id_friend, $PR);
