@@ -217,8 +217,7 @@ class Users_model extends CI_Model
 		$this->db->select('data')->from($tableName)->where('pending_requests', $friend_id);
 		$query = $this->db->get();
 		$status = $query->result_array();
-		
-		if ($status[0]['data'] == 'friend'){
+		if (!empty($status) && $status[0]['data'] == 'friend'){
 			return true;
 		}
 		else {return false;}
@@ -252,4 +251,16 @@ class Users_model extends CI_Model
 		}
 		return $fPosts;
 	}
+	public function friend_list($user_id){
+		$this->db->select('fname')->from('users')->where('id' , $user_id);
+				$query = $this->db->get();
+				$tfName =$query->row()->fname;
+				$this->db->select('lname')->from('users')->where('id' , $user_id);
+				$query = $this->db->get();
+				$tlName = $query->row()->lname;
+				$table = $tfName.$tlName.$user_id;
+				$query = $this->db->get_where($table , array('data' => 'friend'));
+				return $query->result_array();
+	}
+
 }
