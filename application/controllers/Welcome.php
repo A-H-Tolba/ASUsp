@@ -177,7 +177,7 @@ class Welcome extends CI_Controller {
 		$data_name['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
 		$data = array(
-				'content' => $this->input->post('body'),
+				'content' =>'<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data_name['session']['user_name'].'</a>'." Wrote \r\n".$this->input->post('body'),
 			);
 		$this->Users_model->create_post($data,$id);
 		redirect('Welcome/feed');
@@ -190,7 +190,7 @@ class Welcome extends CI_Controller {
  		$userName = $this->session->userdata['user_name'];
 		$userAccount = $userName.$id;
 		$tableName = $this->session->userdata['tableName'];
- 		$comment = $this->input->post('comment');
+ 		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data['session']['user_name'].'</a>'." Commented : ".$this->input->post('comment');
  		$this->load->library('form_validation');
  		$this->form_validation->set_rules('comment', 'Comment', 'required');
  		if($this->form_validation->run() === FALSE){
@@ -211,7 +211,7 @@ class Welcome extends CI_Controller {
  		$fName = $data['writer'][0]['fname'];
 		$lName = $data['writer'][0]['lname'];
 		$tableName = $fName.$lName.$id;
- 		$comment = $this->input->post('comment');
+ 		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data['session']['user_name'].'</a>'." Commented : ".$this->input->post('comment');
  		$this->load->library('form_validation');
  		$this->form_validation->set_rules('comment', 'Comment', 'required');
  		if($this->form_validation->run() === FALSE){
@@ -306,10 +306,17 @@ class Welcome extends CI_Controller {
 	public function getFriend($friend_id)
 	{
 		$data['session'] = $this->session->userdata;
-		$data['friendInfo'] = $this->Users_model->get_friend($friend_id);
-		$data['friendStatus'] = $this->Users_model->is_friend($friend_id,$this->session->userdata['user_id']);
-		$this->load->view('header', $data);
-		$this->load->view('Fprofile', $data);
+		$id_user = $this->session->userdata['user_id'];
+		if($id_user != $friend_id)
+		{
+			$data['friendInfo'] = $this->Users_model->get_friend($friend_id);
+				$data['friendStatus'] = $this->Users_model->is_friend($friend_id,$this->session->userdata['user_id']);
+				$this->load->view('header', $data);
+				$this->load->view('Fprofile', $data);
+		}
+		else{
+			redirect('Welcome/account');
+		}
 	}
 	public function accept($request)
 	{
