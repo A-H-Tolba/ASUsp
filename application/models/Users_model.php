@@ -116,7 +116,7 @@ class Users_model extends CI_Model
 
 	public function get_requests($tableName)
 	{
-		$query = $this->db->get_where($tableName , array('data' => 'request'));
+		$query = $this->db->get_where($tableName , array('data' => 'pending_request'));
 		return $query->result_array();
 	}
 
@@ -134,6 +134,7 @@ class Users_model extends CI_Model
 		$lName = $query->row()->lname;
 		$tableName = $fName.$lName.$id_friend;
 		$PR = array(
+			'data' => 'pending_request',
 			'pending_requests' => $id_user,
 		);
 		return $this->db->insert($fName.$lName.$id_friend, $PR);
