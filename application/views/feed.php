@@ -34,33 +34,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php foreach(array_reverse($posts) as $post):?>
 	    
-	<div id="rpost"><p><?php echo nl2br($post['content']);?></div>
+	<div id="rpost"><p><?php echo nl2br($post['post']);?></div>
 	<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
-		<?php $liked = $post['likes']; 
+		<?php //$liked = $post['likes']; 
 			
 		?>
-		<input type="button" style="color: <?=getColor($liked)?>;" value = "<?=getValue($liked)?>" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);?>'" class="btn btn-md btn-default"></input>
+		<!--<input type="button" style="color: <?php /*=getColor($liked)?>;" value = "<?=getValue($liked)?>" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);*/?>'" class="btn btn-md btn-default"></input>-->
 		<br>
 		<br>
-		<?php echo form_open('Welcome/addComment/'.$post['id'].'/'.$session['tableName']); ?>
+		<?php echo form_open('Welcome/addComment/'.$post['id']); ?>
 		<input type="text" name = "comment" placeholder="add comment" >
 		<input type="submit" name="submit" value="Comment">
 		</form>
 	</div></p>
 		
-	
-</h3>
-<br> 
+<br/> 
         <?php endforeach; ?>
 
-
-<?php foreach(array_reverse($fPosts) as $post):?>
+<!--
+<?php /*foreach(array_reverse($fPosts) as $post):?>
         
         <div id="rpost"><p><?php echo nl2br($post['content']);?></div>
-		<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
-	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
+		<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p> -->
+	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> --><!--
 		<div id="commentDiv" style="text-align: center;">
 		<?php $liked = $post['likes']; 
 			
@@ -73,11 +71,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="submit" name="submit" value="Comment">
 		</form>
 	</div></p>
-		
-	
-</h3>
-<br> 
-        <?php endforeach; ?>
+
+<br/> 
+        <?php endforeach; */?>-->
 </body>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery-3.2.1.min.js"></script>

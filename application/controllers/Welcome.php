@@ -61,7 +61,6 @@ class Welcome extends CI_Controller {
 	public function login()
 	{
 		$data['auth_error'] = '';
-
 		$data['friendStatus'] = false;
 		$email = $this->input->post ('email') ;
 		$password = $this->input->post ('password') ;
@@ -88,7 +87,8 @@ class Welcome extends CI_Controller {
 					'email' => $userdata['email'] ,
 					'user_id' => $userdata['id'],
 					'user_name' => $userdata['fname']." ".$userdata['lname'],
-					'tableName' => $userdata['fname'].$userdata['lname'].$userdata['id'],
+					//'tableName' => $userdata['fname'].$userdata['lname'].$userdata['id'],
+					'friends_id' => $this->Users_model->friends_id($userdata['id']),
 					'pic' => $userdata['pic'],
 					'logged_in' => true
 			)) ;
@@ -100,8 +100,8 @@ class Welcome extends CI_Controller {
 	public function feed()
 	{
 		$data['session'] = $this->session->userdata;
-		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['tableName']);
-		$data['fPosts'] = $this->Users_model->get_fPosts($this->session->userdata['user_id'],$this->session->userdata['tableName']);
+		$data['posts'] = $this->Users_model->get_posts($this->session->userdata['user_id']);
+		//$data['fPosts'] = $this->Users_model->get_fPosts($this->session->userdata['user_id'],$this->session->userdata['tableName']);
 		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('feed', $data);
@@ -121,8 +121,9 @@ class Welcome extends CI_Controller {
 	public function account()
 	{
 		$data['session'] = $this->session->userdata;
-		$tableName = $this->session->userdata['tableName'];
-		$data['posts'] = $this->Users_model->get_posts($tableName);
+		//$tableName = $this->session->userdata['tableName'];
+		//$data['posts'] = $this->Users_model->get_posts($tableName);
+		$data['myposts'] = $this->Users_model->get_posts($this->session->userdata['user_id']);
 		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
@@ -174,29 +175,31 @@ class Welcome extends CI_Controller {
 		$this->load->view('ad_search_res', $data1);
 	}
 	public function create_post(){
-		$data_name['session'] = $this->session->userdata;
+		/*$data_name['session'] = $this->session->userdata;
 		$id = $this->session->userdata['user_id'];
 		$data = array(
 				'content' =>'<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data_name['session']['user_name'].'</a>'." Wrote \r\n".$this->input->post('body'),
 			);
-		$this->Users_model->create_post($data,$id);
+		$this->Users_model->create_post($data,$id);*/
+		$data = array(
+			'user_id' => $this->session->userdata['user_id'],
+			'post' => $this->input->post('body'),
+			'likes_num' => 0
+		);
+		$this->Users_model->create_post($data);
 		redirect('Welcome/feed');
 	}
 
-	public function addComment($post_id,$table)
+	public function addComment($post_id)
  	{
-		$data['session'] = $this->session->userdata;
- 		$id = $this->session->userdata['user_id'];
- 		$userName = $this->session->userdata['user_name'];
-		$userAccount = $userName.$id;
- 		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$id.'">'.$data['session']['user_name'].'</a>'." Commented : ".$this->input->post('comment');
+ 		$comment = '<a href="'.base_url().'Welcome/getFriend/'.$this->session->userdata['user_id'].'">'.$this->session->userdata['user_name'].'</a>'." Commented : ".$this->input->post('comment');
  		$this->load->library('form_validation');
  		$this->form_validation->set_rules('comment', 'Comment', 'required');
  		if($this->form_validation->run() === FALSE){
  			$this->load->view('header', $data);
  			$this->load->view('profile', $data);
  		} else {
- 			$this->Users_model->create_comment($post_id,$table,$comment);
+ 			$this->Users_model->create_comment($post_id, $comment);
 			// $this->load->view('header', $data);
 		// $this->load->view('profile', $data);
 		redirect('Welcome/feed');
@@ -336,9 +339,9 @@ class Welcome extends CI_Controller {
 		redirect('Welcome/feed');
 	}
 	public function friend_list(){
-		$data['session'] = $this->session->userdata;
-		$id = $this->session->userdata['user_id'];
-		$data['friends'] = $this->Users_model->friend_list($id);
+		/*$data['session'] = $this->session->userdata;
+		$id = $this->session->userdata['user_id'];*/
+		$data['friends'] = ($this->Users_model->friend_list($this->session->userdata['friends_id']);
 		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('fList', $data);
