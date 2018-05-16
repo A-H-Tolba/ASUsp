@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php foreach(array_reverse($myposts) as $post):?>
 	    
 	<div id="rpost"><p><?php echo nl2br($post['post']);?></div>
-	<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
+	<div id="rcomment"><p style="text-align: center;"><?php echo nl2br($post['comments']);?></p></div>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
 		

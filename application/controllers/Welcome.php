@@ -338,10 +338,9 @@ class Welcome extends CI_Controller {
 		$this->Users_model->rejectFriend($request,$tableName);
 		redirect('Welcome/feed');
 	}
-	public function friend_list(){
-		/*$data['session'] = $this->session->userdata;
-		$id = $this->session->userdata['user_id'];*/
-		$data['friends'] = ($this->Users_model->friend_list($this->session->userdata['friends_id']);
+	public function friend_list()
+	{
+		$data['friends'] = ($this->Users_model->friend_list($this->session->userdata['friends_id']));
 		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('fList', $data);
