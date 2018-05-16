@@ -6,8 +6,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php for ($i=0; $i <sizeof($friends); $i+=3) {
-		echo '<br><a href="'.base_url().'Welcome/getFriend/'.$friends[$i].'">'.'<h2 style="text-align: center;">'. $friends[$i+1].'</h2>' .'</a>'.'<img id="pp" src="'.base_url().'/uploads/'.$friends[$i+2].'" />';
+<?php foreach ($friends as $friend) {
+	# code...
+
+		echo '<br><a href="'.base_url().'Welcome/getFriend/'.$friend['id'].'">'.'<h2 style="text-align: center;">'. $friend['username'].'</h2>' .'</a>'.'<img id="pp" src="'.base_url().'/uploads/'.$friend['pic'].'" />';
 					
  } ?>
 

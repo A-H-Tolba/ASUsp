@@ -34,7 +34,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php foreach(array_reverse($posts) as $post):?>
 	    
-	<div id="rpost"><p><?php echo nl2br($post['post']);?></div>
+	<div id="rpost"><p><?php 
+	$writer = $this->Users_model->get_writer($post['user_id']);
+	echo '<img id="pp" src="'.base_url().'/uploads/'.$writer['pic'].'" style="width:4%;height:4%;padding-right: 1%" align="left" />'.'<a href="'.base_url().'Welcome/getFriend/'.$post['user_id'].'" style="text-align: center;" >'.' '.$writer['name'].'</a>'.nl2br(" Wrote \n".$post['post']);?></div>
 	<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">

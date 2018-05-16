@@ -299,11 +299,14 @@ class Users_model extends CI_Model
 		}
 		return $friendsl;*/
 		$list = array();
-		foreach ($user_id as $user) {
-			$friend['id'] = $user;
-			$friend['username'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->fname." ".$this->db->get_where('users',array('id'=>$user))->result()[0]->lname;
-			$friend['pic'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->pic;
-			array_push($list,$friend);
+		if(isset($user_id))
+		{
+			foreach ($user_id as $user) {
+				$friend['id'] = $user;
+				$friend['username'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->fname." ".$this->db->get_where('users',array('id'=>$user))->result()[0]->lname;
+				$friend['pic'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->pic;
+				array_push($list,$friend);
+			}
 		}
 		return $list;
 	}
@@ -313,6 +316,18 @@ class Users_model extends CI_Model
 		parse_str($str, $id);
 		return $id['id'];
 	}
-
+	public function get_writer($id){
+		$this->db->select('fname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$fName =$query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+		$this->db->select('pic')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$pic = $query->row()->pic;
+		$writer = array('pic'=>$pic,'name'=>$fName.' '.$lName);
+		return $writer;
+	}
 
 }
