@@ -12,7 +12,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <img id="pp" src="<?php echo base_url()."/uploads/".$session['pic']; ?>"/>
 <p id="wp">Welcome to <?php echo $session['user_name']; ?>'s profile.</p>
 <br/>
-<p>Latest posts</p>
+<p class="text-center" style = "color:white">Latest posts</p>
+
+<?php 
+	function getColor($num)
+	{
+		if($num != '1')
+		{
+			return '#000000';
+		}
+		else
+		{
+			return '#0000FF';
+		}
+	}
+
+	function getValue($num)
+	{
+		if($num != '1')
+		{
+			return 'like';
+		}
+		else
+		{
+			return 'liked';
+		}
+	}
+?>
 <?php foreach(array_reverse($myposts) as $post):?>
 	    
 	<div id="rpost"><p><?php 
@@ -21,7 +47,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div id="rcomment"><p style="text-align: center;"><?php echo nl2br($post['comments']);?></p></div>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
-		
+		<?php $liked = $post['likes_num']; 
+			echo "<h4 style = 'color:white;'>".$liked." People like this</h4>";
+			echo "<br><br>";
+		?>
+		<input type="button" style="color: <?=getColor($liked)?>;" value = "<?=getValue($liked)?>" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);?>'" class="btn btn-md btn-default"></input>
+		<br>
+		<br>
 		<?php echo form_open('Welcome/addComment/'.$post['id']); ?>
 		<input type="text" name = "comment" placeholder="add comment" >
 		<input type="submit" name="submit" value="Comment">

@@ -341,12 +341,10 @@ class Welcome extends CI_Controller {
 	}
 	public function friend_list()
 	{
-				$data['session'] = $this->session->userdata;
+		$data['session'] = $this->session->userdata;
 		$data['friends'] = ($this->Users_model->friend_list($this->session->userdata['friends_id']));
 		$data['friendStatus'] = false;
 		$this->load->view('header', $data);
 		$this->load->view('fList', $data);
 	}
 }
-
-
