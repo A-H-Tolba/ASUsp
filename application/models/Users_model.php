@@ -109,30 +109,39 @@ class Users_model extends CI_Model
 	{
         $this->db->insert('posts',$data);
 	}
-	public function like_post($post_id,$userAccount)
+	public function like_post($post_id,$email)
 	{
-		
-		$query = $this->db->query("SELECT likes FROM $userAccount WHERE id = $post_id;");
+		$query = $this->db->query("SELECT likes_num FROM posts WHERE id = $post_id;");
 		foreach ($query->result() as $row)
 		{
-				echo $row->likes;
+				$x = $row->likes_num;
 		}
-		if($row->likes != '1')
+		$query = $this->db->query("SELECT likers FROM posts WHERE id = $post_id;");
+		foreach ($query->result() as $row)
 		{
+				$y = $row->likers;
+		}
+		if(strpos($y,$email) !== false)
+		{
+			$x-=1;
+			$y = str_replace($email, '', $y);
 			$like = array
 			(
-				'likes' => '1',
+				'likes_num' => $x,
+				'likers' => $y
 			);
 		}
 		else
 		{
+			$x+=1;
 			$like = array
 			(
-				'likes' => '0',
+				'likes_num' => $x,
+				'likers' => $email
 			);
 		}
 		$this->db->where('id',$post_id);
-		return $this->db->update($userAccount, $like);
+		return $this->db->update('posts', $like);
 
 	}
 
@@ -299,11 +308,14 @@ class Users_model extends CI_Model
 		}
 		return $friendsl;*/
 		$list = array();
-		foreach ($user_id as $user) {
-			$friend['id'] = $user;
-			$friend['username'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->fname." ".$this->db->get_where('users',array('id'=>$user))->result()[0]->lname;
-			$friend['pic'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->pic;
-			array_push($list,$friend);
+		if(isset($user_id))
+		{
+			foreach ($user_id as $user) {
+				$friend['id'] = $user;
+				$friend['username'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->fname." ".$this->db->get_where('users',array('id'=>$user))->result()[0]->lname;
+				$friend['pic'] = $this->db->get_where('users',array('id'=>$user))->result()[0]->pic;
+				array_push($list,$friend);
+			}
 		}
 		return $list;
 	}
@@ -313,6 +325,18 @@ class Users_model extends CI_Model
 		parse_str($str, $id);
 		return $id['id'];
 	}
-
+	public function get_writer($id){
+		$this->db->select('fname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$fName =$query->row()->fname;
+		$this->db->select('lname')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$lName = $query->row()->lname;
+		$this->db->select('pic')->from('users')->where('id' , $id);
+		$query = $this->db->get();
+		$pic = $query->row()->pic;
+		$writer = array('pic'=>$pic,'name'=>$fName.' '.$lName);
+		return $writer;
+	}
 
 }
