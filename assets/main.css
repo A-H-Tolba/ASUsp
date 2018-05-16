@@ -13,7 +13,7 @@ html, body {height: 100%; width: 100%; margin: 0;}
 #wpost textarea {width: 50%; margin-left:25%;}
 #pp {width: 10em; height: 10em; margin-left: calc(50% - 5em);}
 #wp {text-align: center; font-size: 1.6em;}
-#rpost {background-color: #f0e9cc; width: 50%; margin-left: 25%; margin: 0.90em; border-radius: 3px;}
-#rcomment {background-color: #f0e990; width: 48%; margin-left: 26%; margin: 0.90em;}
+#rpost {background-color: #f0e9cc; width: 50%; margin-left: 25%; padding: 0.90em; border-radius: 3px;}
+#rcomment {background-color: #f0e990; width: 48%; margin-left: 26%; padding: 0 0 .90em 0;}
 #rpost p {font-size: 1.10em;}
 #rcomment p {font-size: 1.06em;}
