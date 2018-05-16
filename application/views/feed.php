@@ -34,8 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php foreach(array_reverse($posts) as $post):?>
 	    
-<h2 style="text-align: center;"> <?php echo nl2br($post['content']);?> </h2>
-<h4 style="text-align: center;"><?php echo nl2br($post['comments']);?></h4>
+	<div id="rpost"><p><?php echo nl2br($post['content']);?></div>
+	<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
 		<?php $liked = $post['likes']; 
@@ -58,8 +58,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php foreach(array_reverse($fPosts) as $post):?>
         
-        <h2 style="text-align: center;"> <?php echo nl2br($post['content']);?> 
-		<h4 style="text-align: center;"><?php echo nl2br($post['comments']);?></h4>
+        <div id="rpost"><p><?php echo nl2br($post['content']);?></div>
+		<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
 		<?php $liked = $post['likes']; 
@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="text" name = "comment" placeholder="add comment" >
 		<input type="submit" name="submit" value="Comment">
 		</form>
-	</div></h2>
+	</div></p>
 		
 	
 </h3>
