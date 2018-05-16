@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2018 at 06:09 AM
+-- Generation Time: May 16, 2018 at 11:45 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -35,21 +35,19 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `pic` varchar(255) NOT NULL,
-  `user_table_url` varchar(255) NOT NULL DEFAULT '-'
+  `friends` text NOT NULL,
+  `friend_requests` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `password`, `pic`, `user_table_url`) VALUES
-(0, 'admin', 'admin', 'admin@m.com', 'admin', 'default.png', '-'),
-(18, 'new', 'user', 'newuser@yahoo.com', 'newpassword', 'default.png', '<a href=\"http://localhost/ASUsp/Welcome/user_table?tb=newuser18\" target=\"_blank\">user\'s data</a>'),
-(19, 'Ahmed', 'Hani', 'Ahmed_hani@yahoo.com', '123456789', '73510824.jpg', '<a href=\"http://localhost/ASUsp/Welcome/user_table?tb=ahmedhani19\" target=\"_blank\">user\'s data</a>'),
-(26, 'John', 'Doe', 'john.doe@yahoo.com', 'jd123', 'default.png', '<a href=\"http://localhost/ASUsp/Welcome/user_table?tb=johndoe26\" target=\"_blank\">user\'s data</a>'),
-(27, 'Jane', 'Doe', 'jane.doe@yahoo.com', 'jd456', 'default.png', '<a href=\"http://localhost/ASUsp/Welcome/user_table?tb=janedoe27\" target=\"_blank\">user\'s data</a>'),
-(29, 'John', 'Morrison', 'j_hennigan@wwe.com', 'starshippain', 'default.png', '<a href=\"http://localhost/ASUsp/Welcome/user_table?tb=JohnMorrison29\" target=\"_blank\">user\'s data</a>'),
-(30, 'user', 'name', 'user.name@yahoo.com', 'userpassword', 'default.png', '<a href=\"http://localhost/ASUsp/Welcome/user_table?tb=username30\" target=\"_blank\">user\'s data</a>');
+INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `password`, `pic`, `friends`, `friend_requests`) VALUES
+(0, 'admin', 'admin', 'admin@m.com', 'admin', 'default.png', '', ''),
+(31, 'Ahmed', 'Hani', 'ahmed_hani@yahoo.com', '123456789', '20604169_1587127597987558_9126298777843617099_n.jpg', 'id[]=32&id[]=33', ''),
+(32, 'new', 'user', 'newuser@yahoo.com', 'newpassword', 'default.png', 'id[]=31&id[]=33', ''),
+(33, 'Ahmed', 'Tolba', 'ahmed_tolba@yahoo.com', '321654', 'default.png', 'id[]=31&id[]=32', '');
 
 --
 -- Indexes for dumped tables
@@ -69,7 +67,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
