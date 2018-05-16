@@ -227,16 +227,17 @@ class Welcome extends CI_Controller {
 		redirect('Welcome/f_feed/'.$id);
  		}
 	 }
-	public function Like($post_id,$table)
-	{
-		$data['session'] = $this->session->userdata;
- 		$id = $this->session->userdata['user_id'];
- 		$userName = $this->session->userdata['user_name'];
-		$userAccount = $userName.$id;
-		$tableName = $this->session->userdata['tableName'];
-		$this->Users_model->like_post($post_id,$table);
-		redirect('Welcome/feed');
-	}
+	 public function Like($post_id)
+	 {
+		 $data['session'] = $this->session->userdata;
+	  // 	$id = $this->session->userdata['user_id'];
+	  // 	$userName = $this->session->userdata['user_name'];
+		 // $userAccount = $userName.$id;
+		 //$tableName = $this->session->userdata['tableName'];
+		 $email = $this->session->userdata['email'];
+		 $this->Users_model->like_post($post_id,$email);
+		 redirect('Welcome/feed');
+	 }
 	public function fLike($writer_id,$post_id)
 	{
 		$data['session'] = $this->session->userdata;

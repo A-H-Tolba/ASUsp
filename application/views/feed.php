@@ -40,10 +40,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<p style="text-align: center;"><?php echo nl2br($post['comments']);?></p>
 	<!-- <button id = "commentBtn" onclick="return addComment()">Comment</button> -->
 		<div id="commentDiv" style="text-align: center;">
-		<?php //$liked = $post['likes']; 
-			
+		<?php $liked = $post['likes_num']; 
+			echo "<h4 style = 'color:white;'>".$liked." People like this</h4>";
+			echo "<br><br>";
 		?>
-		<!--<input type="button" style="color: <?php /*=getColor($liked)?>;" value = "<?=getValue($liked)?>" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);*/?>'" class="btn btn-md btn-default"></input>-->
+		<input type="button" style="color: <?=getColor($liked)?>;" value = "<?=getValue($liked)?>" id="likeBtn" onclick="window.location='<?php echo site_url("Welcome/Like/".$post['id']);?>'" class="btn btn-md btn-default"></input>
 		<br>
 		<br>
 		<?php echo form_open('Welcome/addComment/'.$post['id']); ?>
